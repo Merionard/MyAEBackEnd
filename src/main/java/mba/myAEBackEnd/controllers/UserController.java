@@ -20,11 +20,6 @@ public class UserController {
     private UserMapper userMapper;
     private UserRepository userRepository;
 
-    public ResponseEntity<UserDto> createUser(@RequestBody @Valid UserDto userDto) {
-        userRepository.save(userMapper.toUser(userDto));
-        return ResponseEntity.created(URI.create("/users/" + userDto.getLastName())).body(userDto);
-
-    }
 
     @GetMapping("/helloWorld")
     public String helloWorld() {
