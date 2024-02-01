@@ -6,6 +6,7 @@ import mba.myAEBackEnd.dto.UserDto;
 import mba.myAEBackEnd.mapper.UserMapper;
 import mba.myAEBackEnd.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,7 @@ public class UserController {
 
 
     @GetMapping("/helloWorld")
-    public String helloWorld() {
-        return "hello world";
+    public ResponseEntity<UserDto> helloWorld(@AuthenticationPrincipal UserDto userDto) {
+        return ResponseEntity.ok(userDto);
     }
 }

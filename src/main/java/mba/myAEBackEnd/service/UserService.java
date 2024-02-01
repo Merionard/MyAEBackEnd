@@ -1,14 +1,12 @@
 package mba.myAEBackEnd.service;
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import mba.myAEBackEnd.dto.CredentialsDto;
 import mba.myAEBackEnd.dto.SignUpDto;
 import mba.myAEBackEnd.dto.UserDto;
 import mba.myAEBackEnd.entity.User;
 import mba.myAEBackEnd.mapper.UserMapper;
 import mba.myAEBackEnd.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,9 +24,9 @@ public class UserService {
     private  PasswordEncoder passwordEncoder;
     private UserMapper userMapper;
 
-    public UserDto findByLogin(String login){
-        User user = userRepository.findByLogin(login)
-                .orElseThrow(()->new UsernameNotFoundException("User with " + login + " not found"));
+    public UserDto findByEmail(String email){
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(()->new UsernameNotFoundException("User with " + email + " not found"));
 
         return userMapper.toUserDto(user);
 
@@ -36,8 +34,8 @@ public class UserService {
 
     public UserDto login(CredentialsDto credentialsDto){
 
-        User user = userRepository.findByLogin(credentialsDto.getLogin())
-                .orElseThrow(()->new UsernameNotFoundException("User with " + credentialsDto.getLogin() + " not found"));
+        User user = userRepository.findByEmail(credentialsDto.getEmail())
+                .orElseThrow(()->new UsernameNotFoundException("User with " + credentialsDto.getEmail() + " not found"));
 
         if(passwordEncoder.matches(CharBuffer.wrap(credentialsDto.getPassword()),user.getPassword())){
             return userMapper.toUserDto(user);
@@ -49,7 +47,7 @@ public class UserService {
 
     public UserDto register(SignUpDto signUpDto){
 
-        Optional<User> optionalUser =  userRepository.findByLogin(signUpDto.getLogin());
+        Optional<User> optionalUser =  userRepository.findByEmail(signUpDto.getEmail());
         if(optionalUser.isPresent()){
             throw new BadCredentialsException("Login already use!");
         }

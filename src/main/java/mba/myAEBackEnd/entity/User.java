@@ -25,9 +25,9 @@ public class User {
 
     @Column(nullable = false)
     @Size(max = 100)
-    private String login;
+    private String password;
 
     @Column(nullable = false)
     @Size(max = 100)
-    private String password;
+    private String email;
 }
