@@ -30,12 +30,12 @@ public class UserAuthProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public String createToken(String login){
+    public String createToken(String email){
         Date now = new Date();
         Date endValidity = new Date(now.getTime()+3_600_000);
 
         return JWT.create()
-                .withIssuer(login)
+                .withIssuer(email)
                 .withIssuedAt(now)
                 .withExpiresAt(endValidity)
                 .sign(Algorithm.HMAC256(secretKey));
