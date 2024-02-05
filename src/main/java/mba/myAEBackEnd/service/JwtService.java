@@ -1,4 +1,4 @@
-package mba.myAEBackEnd.config;
+package mba.myAEBackEnd.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -19,7 +19,7 @@ import java.util.Date;
 
 @RequiredArgsConstructor
 @Component
-public class UserAuthProvider {
+public class JwtService {
 
     @Value("${security.jwt.token.secret-key}")
     private String secretKey;

@@ -1,12 +1,13 @@
 package mba.myAEBackEnd.controllers;
 
 import lombok.RequiredArgsConstructor;
-import mba.myAEBackEnd.config.UserAuthProvider;
+import mba.myAEBackEnd.service.JwtService;
 import mba.myAEBackEnd.dto.CredentialsDto;
 import mba.myAEBackEnd.dto.SignUpDto;
 import mba.myAEBackEnd.dto.UserDto;
 import mba.myAEBackEnd.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -17,10 +18,10 @@ import java.net.URI;
 public class AuthController {
 
     private final UserService userService;
-    private final UserAuthProvider userAuthProvider;
+    private final JwtService userAuthProvider;
 
     @PostMapping("/login")
-    public ResponseEntity<UserDto> login(@RequestBody CredentialsDto credentialsDto){
+    public ResponseEntity<UserDto> login(@RequestBody @Validated CredentialsDto credentialsDto){
         UserDto userDto = userService.login(credentialsDto);
         userDto.setToken(userAuthProvider.createToken(userDto.getEmail()));
 

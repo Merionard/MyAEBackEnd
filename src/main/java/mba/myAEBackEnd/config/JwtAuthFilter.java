@@ -5,15 +5,18 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import mba.myAEBackEnd.service.JwtService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 @RequiredArgsConstructor
+@Service
 public class JwtAuthFilter extends OncePerRequestFilter {
 
-    private final UserAuthProvider userAuthProvider;
+    private final JwtService jwtService;
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
@@ -25,7 +28,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             if(elements.length == 2 && "Bearer".equals(elements[0])){
                 try{
                     SecurityContextHolder.getContext().setAuthentication(
-                            userAuthProvider.validateToken(elements[1])
+                            jwtService.validateToken(elements[1])
                     );
                 }catch (RuntimeException e){
                     SecurityContextHolder.clearContext();
