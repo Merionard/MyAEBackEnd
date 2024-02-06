@@ -1,7 +1,6 @@
 package mba.myAEBackEnd.service;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import mba.myAEBackEnd.dto.CredentialsDto;
 import mba.myAEBackEnd.dto.SignUpDto;
 import mba.myAEBackEnd.dto.UserDto;
@@ -29,12 +28,17 @@ public class UserService implements UserDetailsService {
     private  PasswordEncoder passwordEncoder;
     private UserMapper userMapper;
 
-    public UserDto findByEmail(String email){
+    public UserDto findDtoByEmail(String email){
         User user = userRepository.findByEmail(email)
                 .orElseThrow(()->new UsernameNotFoundException("User with " + email + " not found"));
 
         return userMapper.toUserDto(user);
 
+    }
+
+    public User findUserByEmail(String email){
+        return userRepository.findByEmail(email)
+                .orElseThrow(()->new UsernameNotFoundException("User with " + email + " not found"));
     }
 
     public UserDto login(CredentialsDto credentialsDto){
@@ -74,5 +78,9 @@ public class UserService implements UserDetailsService {
 
         return userRepository.findByEmail(email)
                 .orElseThrow(()->new UsernameNotFoundException("User with " + email + " not found"));
+    }
+
+    public void saveUser(User user){
+         userRepository.save(user);
     }
 }

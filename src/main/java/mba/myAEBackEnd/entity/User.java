@@ -7,14 +7,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import mba.myAEBackEnd.dto.CustomerDto;
 import mba.myAEBackEnd.enums.RoleEnum;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @NoArgsConstructor
 @Data
@@ -44,6 +43,9 @@ public class User implements UserDetails {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Role role;
+
+    @OneToMany(mappedBy = "user" ,cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Customer> customers = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -78,6 +80,10 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void addCustomer (Customer customer){
+        customers.add(customer);
     }
 
 }

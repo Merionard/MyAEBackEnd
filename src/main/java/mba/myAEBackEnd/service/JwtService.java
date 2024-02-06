@@ -7,7 +7,6 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import mba.myAEBackEnd.dto.UserDto;
-import mba.myAEBackEnd.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -46,7 +45,7 @@ public class JwtService {
                 .build();
 
         DecodedJWT decoded = verifier.verify(token);
-        UserDto userDto = userService.findByEmail(decoded.getIssuer());
+        UserDto userDto = userService.findDtoByEmail(decoded.getIssuer());
         return new UsernamePasswordAuthenticationToken(userDto,null, Collections.emptyList());
     }
 }
