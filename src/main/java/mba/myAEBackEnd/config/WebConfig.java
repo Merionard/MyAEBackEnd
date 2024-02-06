@@ -12,6 +12,7 @@ import org.springframework.web.filter.CorsFilter;
 import java.util.Arrays;
 
 
+
 public class WebConfig {
 
     @Bean
@@ -22,7 +23,7 @@ public class WebConfig {
         config.addAllowedOrigin("http://localhost:3000");
         config.setAllowedHeaders(Arrays.asList(HttpHeaders.AUTHORIZATION,HttpHeaders.CONTENT_TYPE,HttpHeaders.ACCEPT));
 
-        config.setAllowedMethods(Arrays.asList(HttpMethod.GET.name(),HttpMethod.POST.name(),HttpMethod.DELETE.name()));
+        config.setAllowedMethods(Arrays.asList(HttpMethod.GET.name(),HttpMethod.POST.name(),HttpMethod.DELETE.name(),HttpMethod.PUT.name()));
         config.setMaxAge(3600L);
         source.registerCorsConfiguration("/**",config);
         FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));

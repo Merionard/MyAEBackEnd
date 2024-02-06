@@ -9,6 +9,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class CustomerDto {
 
+    private Long id;
     private String businessName;
     private String vatNumber;
     private String siren;

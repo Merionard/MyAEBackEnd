@@ -6,12 +6,10 @@ import mba.myAEBackEnd.dto.UserDto;
 import mba.myAEBackEnd.entity.Customer;
 import mba.myAEBackEnd.entity.User;
 import mba.myAEBackEnd.mapper.CustomerMapper;
-import mba.myAEBackEnd.mapper.UserMapper;
 import mba.myAEBackEnd.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -21,18 +19,36 @@ public class CustomerService {
     private CustomerRepository customerRepository;
     private CustomerMapper customerMapper;
 
-    public CustomerDto createNewCustomer(CustomerDto customerDto, UserDto userDto){
-        Customer newCustomer =  customerMapper.toEntityCustomer(customerDto);
+    public CustomerDto createNewCustomer(CustomerDto customerDto, UserDto userDto) {
+        Customer newCustomer = customerMapper.toEntityCustomer(customerDto);
         User user = userService.findUserByEmail(userDto.getEmail());
         newCustomer.setUser(user);
         customerRepository.save(newCustomer);
         return customerDto;
     }
 
-    public List<CustomerDto> fetchAllCustomers(UserDto userDto){
+    public List<CustomerDto> fetchAllCustomers(UserDto userDto) {
         User user = userService.findUserByEmail(userDto.getEmail());
         return customerRepository.findAllByUser(user).stream()
                 .map(customer -> customerMapper.toCustomerDto(customer))
-                .collect(Collectors.toList());
+                .toList();
+    }
+
+    public CustomerDto fetchCustomerById(Long id) throws Exception {
+        Customer customer = findOneById(id);
+        return customerMapper.toCustomerDto(customer);
+    }
+
+    public CustomerDto updateCustomer(Long customerId,CustomerDto customerDto) throws Exception {
+        Customer customer = findOneById(customerId);
+        Customer updatedCustomer = customerMapper.toEntityCustomer(customerDto).setId(customer.getId());
+        updatedCustomer = customerRepository.save(updatedCustomer);
+        return customerMapper.toCustomerDto(updatedCustomer);
+
+    }
+
+    public Customer findOneById(Long id) throws Exception {
+        return customerRepository.findById(id)
+                .orElseThrow(() -> new Exception("Pas de customer pour id: " + id));
     }
 }
