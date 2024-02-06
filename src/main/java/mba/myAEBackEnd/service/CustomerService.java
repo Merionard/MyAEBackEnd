@@ -51,4 +51,8 @@ public class CustomerService {
         return customerRepository.findById(id)
                 .orElseThrow(() -> new Exception("Pas de customer pour id: " + id));
     }
+
+    public void deleteById(Long id){
+        customerRepository.deleteById(id);
+    }
 }
