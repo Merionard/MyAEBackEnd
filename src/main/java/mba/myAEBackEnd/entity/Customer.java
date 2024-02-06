@@ -26,9 +26,6 @@ public class Customer {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public void addAddress(CustomerAddress address){
-        addresses.add(address);
-    }
 
 
 }
