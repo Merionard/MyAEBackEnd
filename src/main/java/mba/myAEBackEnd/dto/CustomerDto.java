@@ -14,5 +14,6 @@ public class CustomerDto {
     private String vatNumber;
     private String siren;
     private Set<CustomerAddressDto> addresses;
-    private Set<CustomerContactDto> contacts;
+    private CustomerContactDto contact;
+    private CustomerAddressDto firstAddress;
 }

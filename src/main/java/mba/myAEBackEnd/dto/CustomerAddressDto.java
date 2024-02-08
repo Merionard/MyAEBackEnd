@@ -10,6 +10,6 @@ public class CustomerAddressDto {
     private String poCode;
     private String country;
     private String addressName;
-    private int number;
+    private String number;
     private String siret;
 }
