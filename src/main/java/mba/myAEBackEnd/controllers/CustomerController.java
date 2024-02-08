@@ -2,6 +2,7 @@ package mba.myAEBackEnd.controllers;
 
 import lombok.AllArgsConstructor;
 import mba.myAEBackEnd.dto.CustomerDto;
+import mba.myAEBackEnd.dto.MessageJsonDto;
 import mba.myAEBackEnd.dto.UserDto;
 import mba.myAEBackEnd.service.CustomerService;
 import org.springframework.http.ResponseEntity;
@@ -38,16 +39,16 @@ public class CustomerController {
 
     }
 
-    @PutMapping("/customer/{customerId}")
+    @PutMapping("/customers/{customerId}")
     public ResponseEntity<CustomerDto> updateCustomer(@RequestBody @Validated CustomerDto customerDto, @PathVariable Long customerId) throws Exception {
         CustomerDto customer = customerService.updateCustomer(customerId, customerDto);
         return ResponseEntity.ok(customer);
     }
 
     @DeleteMapping("/customers/{id}")
-    public ResponseEntity<String> deleteCustomer(@PathVariable Long id) {
+    public ResponseEntity<MessageJsonDto> deleteCustomer(@PathVariable Long id) {
         customerService.deleteById(id);
-        return ResponseEntity.ok("Client supprimé avec succès");
+        return ResponseEntity.ok(new MessageJsonDto("Client supprimé avec succès"));
     }
 
 

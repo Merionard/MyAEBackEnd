@@ -41,7 +41,8 @@ public class CustomerService {
 
     public CustomerDto updateCustomer(Long customerId,CustomerDto customerDto) throws Exception {
         Customer customer = findOneById(customerId);
-        Customer updatedCustomer = customerMapper.toEntityCustomer(customerDto).setId(customer.getId());
+        Customer updatedCustomer = customerMapper.toEntityCustomer(customerDto);
+        updatedCustomer.setUser(customer.getUser());
         updatedCustomer = customerRepository.save(updatedCustomer);
         return customerMapper.toCustomerDto(updatedCustomer);
 

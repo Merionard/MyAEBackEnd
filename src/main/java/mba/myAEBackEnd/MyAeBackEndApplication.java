@@ -19,7 +19,7 @@ public class MyAeBackEndApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/auth/**").allowedOrigins("http://localhost:5173");
-				registry.addMapping("/**").allowedOrigins("http://localhost:5173");
+				registry.addMapping("/**").allowedOrigins("http://localhost:5173").allowedMethods("GET","PUT","POST","DELETE");
 			}
 		};
 	}
