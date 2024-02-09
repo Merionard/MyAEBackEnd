@@ -1,4 +1,4 @@
-package mba.myAEBackEnd.dto;
+package mba.myAEBackEnd.dto.authentication;
 
 import lombok.Data;
 

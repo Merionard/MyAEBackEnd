@@ -2,8 +2,8 @@ package mba.myAEBackEnd.controllers;
 
 import lombok.RequiredArgsConstructor;
 import mba.myAEBackEnd.service.JwtService;
-import mba.myAEBackEnd.dto.CredentialsDto;
-import mba.myAEBackEnd.dto.SignUpDto;
+import mba.myAEBackEnd.dto.authentication.CredentialsDto;
+import mba.myAEBackEnd.dto.authentication.SignUpDto;
 import mba.myAEBackEnd.dto.UserDto;
 import mba.myAEBackEnd.service.UserService;
 import org.springframework.http.ResponseEntity;

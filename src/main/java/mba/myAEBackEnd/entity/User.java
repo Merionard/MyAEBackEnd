@@ -3,12 +3,7 @@ package mba.myAEBackEnd.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.Accessors;
-import mba.myAEBackEnd.dto.CustomerDto;
-import mba.myAEBackEnd.enums.RoleEnum;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -46,6 +41,9 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user" ,cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Customer> customers = new HashSet<>();
+
+    @OneToMany(mappedBy = "user" ,cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<WorkPeriod> workPeriods = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

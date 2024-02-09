@@ -1,7 +1,7 @@
 package mba.myAEBackEnd.service;
 
 import lombok.AllArgsConstructor;
-import mba.myAEBackEnd.dto.CustomerDto;
+import mba.myAEBackEnd.dto.customer.CustomerDto;
 import mba.myAEBackEnd.dto.UserDto;
 import mba.myAEBackEnd.entity.Customer;
 import mba.myAEBackEnd.entity.User;

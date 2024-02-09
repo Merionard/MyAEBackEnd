@@ -1,7 +1,7 @@
 package mba.myAEBackEnd.mapper;
 
-import mba.myAEBackEnd.dto.CustomerAddressDto;
-import mba.myAEBackEnd.dto.CustomerDto;
+import mba.myAEBackEnd.dto.customer.CustomerAddressDto;
+import mba.myAEBackEnd.dto.customer.CustomerDto;
 import mba.myAEBackEnd.entity.Customer;
 import mba.myAEBackEnd.entity.CustomerAddress;
 import org.mapstruct.Mapper;

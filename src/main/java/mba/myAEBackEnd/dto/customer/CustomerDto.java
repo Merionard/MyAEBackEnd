@@ -1,4 +1,4 @@
-package mba.myAEBackEnd.dto;
+package mba.myAEBackEnd.dto.customer;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

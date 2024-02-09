@@ -1,7 +1,7 @@
 package mba.myAEBackEnd.controllers;
 
 import lombok.AllArgsConstructor;
-import mba.myAEBackEnd.dto.CustomerDto;
+import mba.myAEBackEnd.dto.customer.CustomerDto;
 import mba.myAEBackEnd.dto.MessageJsonDto;
 import mba.myAEBackEnd.dto.UserDto;
 import mba.myAEBackEnd.service.CustomerService;

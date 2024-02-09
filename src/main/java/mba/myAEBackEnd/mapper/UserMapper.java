@@ -1,8 +1,7 @@
 package mba.myAEBackEnd.mapper;
 
-import mba.myAEBackEnd.dto.SignUpDto;
+import mba.myAEBackEnd.dto.authentication.SignUpDto;
 import mba.myAEBackEnd.dto.UserDto;
-import mba.myAEBackEnd.entity.Role;
 import mba.myAEBackEnd.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

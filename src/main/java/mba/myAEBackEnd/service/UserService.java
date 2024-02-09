@@ -1,8 +1,8 @@
 package mba.myAEBackEnd.service;
 
 import lombok.AllArgsConstructor;
-import mba.myAEBackEnd.dto.CredentialsDto;
-import mba.myAEBackEnd.dto.SignUpDto;
+import mba.myAEBackEnd.dto.authentication.CredentialsDto;
+import mba.myAEBackEnd.dto.authentication.SignUpDto;
 import mba.myAEBackEnd.dto.UserDto;
 import mba.myAEBackEnd.entity.Role;
 import mba.myAEBackEnd.entity.User;
