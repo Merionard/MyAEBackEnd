@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Data
 @Entity
@@ -15,8 +16,8 @@ public class WorkDay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private LocalDateTime date;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy",timezone = "Europe/Paris")
+    private ZonedDateTime date;
     private float duration;
     @ManyToOne
     @JoinColumn(name = "line_id")
