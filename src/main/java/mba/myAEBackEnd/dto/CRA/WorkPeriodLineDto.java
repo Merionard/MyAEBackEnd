@@ -11,7 +11,6 @@ import java.util.Set;
 public class WorkPeriodLineDto {
     private Long id;
     private Long customerId;
-    private int nbDaysWorked;
     private Set<WorkDayDto> workDays;
     private Set<Long> workDaysToDelete = new HashSet<>();
 }

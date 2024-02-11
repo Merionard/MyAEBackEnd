@@ -2,6 +2,7 @@ package mba.myAEBackEnd.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.util.HashSet;
@@ -15,15 +16,22 @@ public class WorkPeriodLine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long customerId;
-    private int nbDaysWorked;
     @ManyToOne
     @JoinColumn(name="workPeriod_id")
     private WorkPeriod workPeriod;
     @OneToMany(mappedBy = "workPeriodLine",cascade = CascadeType.ALL, orphanRemoval = true)
+    @EqualsAndHashCode.Exclude
     private Set<WorkDay> workDays = new HashSet<>();
 
-    public WorkPeriodLine addWorkDay(WorkDay workDay){
-        workDays.add(workDay);
-        return this;
+    public void addWorkDay(WorkDay workDay){
+        if(workDay!=null){
+            if(workDays == null){
+                workDays = new HashSet<>();
+            }
+            workDay.setWorkPeriodLine(this);
+            workDays.add(workDay);
+
+        }
+
     }
 }

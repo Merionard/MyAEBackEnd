@@ -22,11 +22,11 @@ public class WorkPeriod {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public WorkPeriod addLine(Long customerId){
+    public void addLine(Long customerId){
         WorkPeriodLine line = new WorkPeriodLine()
                 .setCustomerId(customerId);
+        line.setWorkPeriod(this);
         this.lines.add(line);
-        return this;
     }
 
 }

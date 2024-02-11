@@ -15,7 +15,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @AllArgsConstructor
 public class CraController {
 
@@ -34,23 +34,35 @@ public class CraController {
         return ResponseEntity.ok(workPeriodDto);
     }
 
-    @PutMapping("/cra")
+    @PostMapping("/cra/workPeriodLine")
     public ResponseEntity<WorkPeriodLineDto> updateWorkPeriodLine(@RequestBody WorkPeriodLineDto workPeriodLineDto) throws BusinessException {
 
         WorkPeriodLineDto dto = craService.updateWorkPeriodLine(workPeriodLineDto);
         return ResponseEntity.ok(dto);
     }
 
-    @DeleteMapping("/cra/{id}")
+    @DeleteMapping("/cra/workPeriodLine/{id}")
     public ResponseEntity<MessageJsonDto> deleteWorkPeriodLine(@PathVariable Long id){
         craService.deleteWorkPeriodLine(id);
         return ResponseEntity.ok(new MessageJsonDto("Ligne supprimée avec succès"));
     }
 
-    @PutMapping("/cra/addWorkDay/{id}")
+    @PutMapping("/cra/workDay/{id}")
     public ResponseEntity<WorkPeriodLineDto> addWorkDay(@PathVariable Long id, @RequestBody WorkDayDto workDayDto) throws BusinessException {
         WorkPeriodLineDto dto = craService.addWorkDayOnLine(id,workDayDto);
         return ResponseEntity.ok(dto);
+    }
+
+    @DeleteMapping("/cra/workDay/{id}")
+    public ResponseEntity<MessageJsonDto> deleteWorkDay(@PathVariable Long id){
+        craService.deleteWorkDay(id);
+        return ResponseEntity.ok(new MessageJsonDto("Jour de travail supprimé avec succès"));
+    }
+
+    @PostMapping("/cra/workDay")
+    public ResponseEntity<MessageJsonDto> updateWorkDay( @RequestBody WorkDayDto workDayDto) throws BusinessException {
+        craService.updateWorkDay(workDayDto);
+        return ResponseEntity.ok(new MessageJsonDto("Maj effectuée avec succès"));
     }
 
 }

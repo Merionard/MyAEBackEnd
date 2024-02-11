@@ -35,6 +35,8 @@ public class CraService {
                 .setMonth(monthYearDto.getMonth())
                 .setYear(monthYearDto.getYear());
 
+        workPeriodRepository.save(newWorkPeriod);
+
         return workPeriodMapper.toDto(newWorkPeriod);
 
     }
@@ -63,7 +65,7 @@ public class CraService {
     }
 
     public void deleteWorkPeriodLine(Long lineId){
-        workPeriodLineRepository.findById(lineId);
+        workPeriodLineRepository.deleteById(lineId);
     }
 
     public WorkPeriodLineDto addWorkDayOnLine(Long lineId, WorkDayDto workDayDto) throws BusinessException {
@@ -76,6 +78,19 @@ public class CraService {
         return workPeriodMapper.toWorkPeriodLineDto(workPeriodLine);
 
     }
+
+    public void deleteWorkDay(Long workDayId){
+        workDayRepository.deleteById(workDayId);
+    }
+
+    public void updateWorkDay(WorkDayDto workDayDto) throws BusinessException {
+        WorkDay workDay = workDayRepository.findById(workDayDto.getId())
+                .orElseThrow(() -> new BusinessException("no workDay found with id: " + workDayDto.getId()));
+
+        workDay.setDuration(workDayDto.getDuration());
+        workDayRepository.save(workDay);
+    }
+
 }
 
 
