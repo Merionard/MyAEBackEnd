@@ -2,12 +2,14 @@ package mba.myAEBackEnd.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.Collection;
 import java.util.HashSet;
 
 @Data
 @Entity
+@Accessors(chain = true)
 public class WorkPeriod {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,5 +21,12 @@ public class WorkPeriod {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public WorkPeriod addLine(Long customerId){
+        WorkPeriodLine line = new WorkPeriodLine()
+                .setCustomerId(customerId);
+        this.lines.add(line);
+        return this;
+    }
 
 }

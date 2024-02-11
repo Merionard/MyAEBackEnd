@@ -2,8 +2,8 @@ package mba.myAEBackEnd.dto.CRA;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import mba.myAEBackEnd.entity.WorkDay;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -12,5 +12,6 @@ public class WorkPeriodLineDto {
     private Long id;
     private Long customerId;
     private int nbDaysWorked;
-    private Set<WorkDay> workDays;
+    private Set<WorkDayDto> workDays;
+    private Set<Long> workDaysToDelete = new HashSet<>();
 }
