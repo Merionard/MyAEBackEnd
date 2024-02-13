@@ -45,6 +45,9 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user" ,cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<WorkPeriod> workPeriods = new HashSet<>();
 
+    @OneToMany(mappedBy = "user" ,cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Invoice> invoices = new HashSet<>();
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(new SimpleGrantedAuthority(role.getLabel()));
