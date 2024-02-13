@@ -30,5 +30,5 @@ public class InvoiceDto {
     private float totalHT;
     private float totalTTC;
     private Long user;
-    private Set<Long> linesToDelete = new HashSet<>();
+    private Set<Long> deletedLines = new HashSet<>();
 }
