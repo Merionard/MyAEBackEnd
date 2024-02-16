@@ -1,6 +1,7 @@
 package mba.myAEBackEnd.controllers;
 
 import lombok.AllArgsConstructor;
+import mba.myAEBackEnd.dto.MessageJsonDto;
 import mba.myAEBackEnd.dto.UserDto;
 import mba.myAEBackEnd.dto.invoice.InvoiceDto;
 import mba.myAEBackEnd.exception.BusinessException;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @RestController
@@ -47,8 +49,9 @@ public class InvoiceController {
     }
 
     @DeleteMapping("/invoice/{id}")
-    public void deleteInvoice(@PathVariable Long id){
+    public ResponseEntity<MessageJsonDto>  deleteInvoice(@PathVariable Long id){
         invoiceService.deleteInvoice(id);
+        return ResponseEntity.ok(new MessageJsonDto("success"));
     }
 
     @GetMapping("/invoice/validate/{id}")
@@ -56,5 +59,13 @@ public class InvoiceController {
         InvoiceDto invoice = invoiceService.validateInvoice(id);
         return ResponseEntity.ok(invoice);
     }
+
+    @PutMapping("/invoice/pay/{id}")
+    public ResponseEntity<InvoiceDto> payInvoice(@PathVariable Long id, @RequestBody ZonedDateTime payDate) throws BusinessException {
+        InvoiceDto invoice = invoiceService.payInvoice(id,payDate);
+        return ResponseEntity.ok(invoice);
+    }
+
+
 
 }

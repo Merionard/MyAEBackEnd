@@ -23,7 +23,7 @@ public class InvoiceDto {
     private String modeReglement;
     private ZonedDateTime createdAt;
     private String customerName;
-    private ZonedDateTime validateAt;
+    private ZonedDateTime validatedAt;
     private ZonedDateTime payedAt;
     private ZonedDateTime dueDate;
     private Set<InvoiceLineDto> lines = new HashSet<>();

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import mba.myAEBackEnd.enums.ConditionReglement;
 import mba.myAEBackEnd.enums.InvoiceStatus;
 import mba.myAEBackEnd.enums.InvoiceType;
 
@@ -32,11 +33,12 @@ public class Invoice {
     private String customerAddress;
     private String customerCountry;
     private String customerMail;
-    private String conditionReglement;
+    @Enumerated(EnumType.STRING)
+    private ConditionReglement conditionReglement;
     private String modeReglement;
     private ZonedDateTime createdAt;
     private String customerName;
-    private ZonedDateTime validateAt;
+    private ZonedDateTime validatedAt;
     private ZonedDateTime payedAt;
     private ZonedDateTime dueDate;
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
