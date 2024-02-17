@@ -27,16 +27,19 @@ public class SecurityConfig {
     private JwtAuthFilter jwtAuthFilter;
     private UserService userService;
     private PasswordEncoder passwordEncoder;
+    private  UserAuthenticationEntryPoint userAuthenticationEntryPoint;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
+                .exceptionHandling((s)->s.authenticationEntryPoint(userAuthenticationEntryPoint))
                 .csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(jwtAuthFilter, BasicAuthenticationFilter.class)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("auth/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
         return http.build();
 
     }
