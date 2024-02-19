@@ -9,6 +9,8 @@ import mba.myAEBackEnd.mapper.ToDoListMapper;
 import mba.myAEBackEnd.repository.TodoListRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class TodoListService {
@@ -16,7 +18,16 @@ public class TodoListService {
     private UserService userService;
     private ToDoListMapper mapper;
     private TodoListRepository todoListRepository;
-    public TodoListDto createNewTodoList(TodoListDto dto, UserDto userDto){
+
+
+    public List<TodoListDto> getAllByUser(UserDto userDto){
+        User user = userService.findUserByEmail(userDto.getEmail());
+        return todoListRepository.findAllByUser(user).stream()
+                .map(t->mapper.toDto(t))
+                .toList();
+    }
+
+    public TodoListDto createUpdateTodoList(TodoListDto dto, UserDto userDto){
 
         User user = userService.findUserByEmail(userDto.getEmail());
         TodoList todoList = mapper.toEntity(dto,user);
@@ -24,16 +35,7 @@ public class TodoListService {
         return mapper.toDto(todoList);
     }
 
-    public TodoListDto updateTodoList(TodoListDto dto,UserDto userDto){
-        User user = userService.findUserByEmail(userDto.getEmail());
-        TodoList todoList = mapper.toEntity(dto,user);
-        todoListRepository.save(todoList);
-        return mapper.toDto(todoList);
-    }
-
-    public void deleteTodoList(TodoListDto dto,UserDto userDto){
-        User user = userService.findUserByEmail(userDto.getEmail());
-        TodoList todoList = mapper.toEntity(dto,user);
-        todoListRepository.delete(todoList);
+    public void deleteTodoList(String title){
+        todoListRepository.deleteById(title);
     }
 }
