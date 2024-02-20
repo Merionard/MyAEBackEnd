@@ -2,10 +2,13 @@ package mba.myAEBackEnd.service;
 
 import lombok.AllArgsConstructor;
 import mba.myAEBackEnd.dto.UserDto;
+import mba.myAEBackEnd.dto.todoList.TaskDto;
 import mba.myAEBackEnd.dto.todoList.TodoListDto;
+import mba.myAEBackEnd.entity.Task;
 import mba.myAEBackEnd.entity.TodoList;
 import mba.myAEBackEnd.entity.User;
 import mba.myAEBackEnd.mapper.ToDoListMapper;
+import mba.myAEBackEnd.repository.TaskRepository;
 import mba.myAEBackEnd.repository.TodoListRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,7 @@ public class TodoListService {
     private UserService userService;
     private ToDoListMapper mapper;
     private TodoListRepository todoListRepository;
+    private TaskRepository taskRepository;
 
 
     public List<TodoListDto> getAllByUser(UserDto userDto){
@@ -37,5 +41,18 @@ public class TodoListService {
 
     public void deleteTodoList(String title){
         todoListRepository.deleteById(title);
+    }
+
+    public TaskDto updateTask(TaskDto taskDto){
+        Task taskToUpdate = taskRepository.findById(taskDto.getId()).orElseThrow();
+        Task task = mapper.toTask(taskDto);
+        task.setTodoList(taskToUpdate.getTodoList());
+        taskRepository.save(task);
+        return taskDto;
+
+    }
+
+    public void deleteTask(Long id){
+        taskRepository.deleteById(id);
     }
 }

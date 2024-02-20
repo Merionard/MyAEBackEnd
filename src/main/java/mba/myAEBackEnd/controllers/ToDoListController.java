@@ -3,6 +3,7 @@ package mba.myAEBackEnd.controllers;
 import lombok.AllArgsConstructor;
 import mba.myAEBackEnd.dto.MessageJsonDto;
 import mba.myAEBackEnd.dto.UserDto;
+import mba.myAEBackEnd.dto.todoList.TaskDto;
 import mba.myAEBackEnd.dto.todoList.TodoListDto;
 import mba.myAEBackEnd.service.TodoListService;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,18 @@ public class ToDoListController {
     public ResponseEntity<List<TodoListDto>> getAll(@AuthenticationPrincipal UserDto userDto){
         List<TodoListDto> todos = todoListService.getAllByUser(userDto);
         return ResponseEntity.ok(todos);
+    }
+
+    @PostMapping("/task")
+    public ResponseEntity<TaskDto> updateTask(@RequestBody TaskDto taskDto){
+        TaskDto task = todoListService.updateTask(taskDto);
+        return ResponseEntity.ok(task);
+    }
+
+    @DeleteMapping("/task/{id}")
+    public ResponseEntity<MessageJsonDto> deleteTask(@PathVariable Long id){
+        todoListService.deleteTask(id);
+        return ResponseEntity.ok(new MessageJsonDto("Success"));
     }
 
 }
