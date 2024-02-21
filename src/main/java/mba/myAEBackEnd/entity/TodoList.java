@@ -20,5 +20,6 @@ public class TodoList {
     @ManyToOne
     private User user;
     @OneToMany(mappedBy = "todoList" ,cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("priorityOrder ASC")
     private Set<Task> tasks = new HashSet<>();
 }

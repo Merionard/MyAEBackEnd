@@ -24,26 +24,26 @@ public class TodoListService {
     private TaskRepository taskRepository;
 
 
-    public List<TodoListDto> getAllByUser(UserDto userDto){
+    public List<TodoListDto> getAllByUser(UserDto userDto) {
         User user = userService.findUserByEmail(userDto.getEmail());
         return todoListRepository.findAllByUser(user).stream()
-                .map(t->mapper.toDto(t))
+                .map(t -> mapper.toDto(t))
                 .toList();
     }
 
-    public TodoListDto createUpdateTodoList(TodoListDto dto, UserDto userDto){
+    public TodoListDto createUpdateTodoList(TodoListDto dto, UserDto userDto) {
 
         User user = userService.findUserByEmail(userDto.getEmail());
-        TodoList todoList = mapper.toEntity(dto,user);
+        TodoList todoList = mapper.toEntity(dto, user);
         todoListRepository.save(todoList);
         return mapper.toDto(todoList);
     }
 
-    public void deleteTodoList(String title){
+    public void deleteTodoList(String title) {
         todoListRepository.deleteById(title);
     }
 
-    public TaskDto updateTask(TaskDto taskDto){
+    public TaskDto updateTask(TaskDto taskDto) {
         Task taskToUpdate = taskRepository.findById(taskDto.getId()).orElseThrow();
         Task task = mapper.toTask(taskDto);
         task.setTodoList(taskToUpdate.getTodoList());
@@ -52,7 +52,7 @@ public class TodoListService {
 
     }
 
-    public void deleteTask(Long id){
+    public void deleteTask(Long id) {
         taskRepository.deleteById(id);
     }
 }

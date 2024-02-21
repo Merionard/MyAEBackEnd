@@ -5,6 +5,7 @@ import mba.myAEBackEnd.dto.todoList.TodoListDto;
 import mba.myAEBackEnd.entity.Task;
 import mba.myAEBackEnd.entity.TodoList;
 import mba.myAEBackEnd.entity.User;
+import mba.myAEBackEnd.enums.TaskStatus;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -31,4 +32,12 @@ public interface ToDoListMapper {
 
     @Mapping(target = "order",source = "priorityOrder")
     TaskDto toTaskDto(Task task);
+
+    default TaskStatus toTaskStatus(String status){
+        if(status!=null){
+            return TaskStatus.valueOf(status);
+        }
+        return TaskStatus.OPEN;
+
+    }
 }
