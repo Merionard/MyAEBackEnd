@@ -15,4 +15,6 @@ public interface InvoiceRepository  extends JpaRepository<Invoice,Long> {
     List<Invoice> getInvoicesByUser(User user);
 
     List<Invoice> getInvoicesByStatusIsAndPayedAtIsBetweenAndUser(InvoiceStatus status, ZonedDateTime startDate,ZonedDateTime endDate,User user);
+
+    List<Invoice> getInvoicesByDueDateIsBeforeAndUserAndStatusIsNot(ZonedDateTime today,User user,InvoiceStatus status);
 }
