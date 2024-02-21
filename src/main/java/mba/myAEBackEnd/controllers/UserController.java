@@ -1,6 +1,7 @@
 package mba.myAEBackEnd.controllers;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import mba.myAEBackEnd.dto.MessageJsonDto;
 import mba.myAEBackEnd.dto.UserDto;
 import mba.myAEBackEnd.service.UserService;
@@ -21,5 +22,10 @@ public class UserController {
     public ResponseEntity<MessageJsonDto> updateUser(@AuthenticationPrincipal UserDto userDto, @RequestBody UserDto updatedUserDto){
         userService.updateUser(userService.findUserByEmail(userDto.getEmail()),updatedUserDto);
         return ResponseEntity.ok(new MessageJsonDto("success"));
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<UserDto> getUser(@AuthenticationPrincipal UserDto userDto){
+        return ResponseEntity.ok(userDto);
     }
 }
