@@ -51,12 +51,14 @@ public class DashboardService {
                 .mapToDouble(Invoice::getTotalTTC)
                 .sum();
 
+
+
         return new DashboardInfoDto()
                 .setCurrentCA(new BigDecimal(sum).setScale(2, RoundingMode.HALF_UP).doubleValue())
                 .setLateInvoices(getLateInvoices(user))
                 .setWorkPeriodInfos(getCurrentMonthWorkPeriod(user))
                 .setCriticalTaskDto(getCriticalTasks(user))
-                .setPlafondActivite(user.getActivity().getPlafond());
+                .setPlafondActivite(user.getActivity()!=null?user.getActivity().getPlafond():null);
 
     }
 

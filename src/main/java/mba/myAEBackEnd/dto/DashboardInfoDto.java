@@ -15,5 +15,5 @@ public class DashboardInfoDto {
     private double currentCA;
     private List<InvoiceDto> lateInvoices;
     private List<TaskDto> criticalTaskDto;
-    private double plafondActivite;
+    private Double plafondActivite;
 }
