@@ -1,29 +1,25 @@
 package mba.myAEBackEnd.controllers;
 
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
+import mba.myAEBackEnd.dto.MessageJsonDto;
 import mba.myAEBackEnd.dto.UserDto;
-import mba.myAEBackEnd.mapper.UserMapper;
-import mba.myAEBackEnd.repository.UserRepository;
+import mba.myAEBackEnd.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
-
 @RestController
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class UserController {
 
+    private UserService userService;
 
-    private UserMapper userMapper;
-    private UserRepository userRepository;
-
-
-    @GetMapping("/helloWorld")
-    public ResponseEntity<UserDto> helloWorld(@AuthenticationPrincipal UserDto userDto) {
-        return ResponseEntity.ok(userDto);
+    @PostMapping("/user")
+    public ResponseEntity<MessageJsonDto> updateUser(@AuthenticationPrincipal UserDto userDto, @RequestBody UserDto updatedUserDto){
+        userService.updateUser(userService.findUserByEmail(userDto.getEmail()),updatedUserDto);
+        return ResponseEntity.ok(new MessageJsonDto("success"));
     }
 }

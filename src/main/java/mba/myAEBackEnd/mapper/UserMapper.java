@@ -12,15 +12,11 @@ public interface UserMapper {
 
 
     @Mapping(target = "role", source = "role.label")
+    @Mapping(target = "activity",source = "activity.label")
     UserDto toUserDto(User user);
 
     @Mapping(target = "userId" , ignore = true)
     User signUpToUser(SignUpDto signUpDto);
-
-    @Named("convertPassword")
-     static String charsToString(char[] password){
-        return new String(password);
-    }
 
 
 

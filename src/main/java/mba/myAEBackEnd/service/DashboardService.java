@@ -55,7 +55,8 @@ public class DashboardService {
                 .setCurrentCA(new BigDecimal(sum).setScale(2, RoundingMode.HALF_UP).doubleValue())
                 .setLateInvoices(getLateInvoices(user))
                 .setWorkPeriodInfos(getCurrentMonthWorkPeriod(user))
-                .setCriticalTaskDto(getCriticalTasks(user));
+                .setCriticalTaskDto(getCriticalTasks(user))
+                .setPlafondActivite(user.getActivity().getPlafond());
 
     }
 

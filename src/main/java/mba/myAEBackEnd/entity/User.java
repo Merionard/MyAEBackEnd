@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mba.myAEBackEnd.enums.ActiviteEnum;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -49,6 +50,9 @@ public class User implements UserDetails {
     private Set<Invoice> invoices = new HashSet<>();
     @OneToMany(mappedBy = "user" ,cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<TodoList> todos = new HashSet<>();
+    @Enumerated(EnumType.STRING)
+    private ActiviteEnum activity;
+    private String image;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

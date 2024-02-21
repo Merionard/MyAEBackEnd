@@ -6,6 +6,7 @@ import mba.myAEBackEnd.dto.authentication.SignUpDto;
 import mba.myAEBackEnd.dto.UserDto;
 import mba.myAEBackEnd.entity.Role;
 import mba.myAEBackEnd.entity.User;
+import mba.myAEBackEnd.enums.ActiviteEnum;
 import mba.myAEBackEnd.enums.RoleEnum;
 import mba.myAEBackEnd.mapper.UserMapper;
 import mba.myAEBackEnd.repository.UserRepository;
@@ -78,5 +79,10 @@ public class UserService implements UserDetailsService {
 
         return userRepository.findByEmail(email)
                 .orElseThrow(()->new UsernameNotFoundException("User with " + email + " not found"));
+    }
+
+    public void updateUser(User user,UserDto updateDto){
+        user.setActivity(ActiviteEnum.findByLabel(updateDto.getActivity()));
+        userRepository.save(user);
     }
 }
