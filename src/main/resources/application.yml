@@ -1,10 +1,7 @@
-
-security.jwt.token.secret-key: my-secret-key
-
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/myAeBackEnd
+    url: jdbc:postgresql://db:5432/myaebackend
     username: postgres
     password: admin
   jpa:
@@ -12,6 +9,11 @@ spring:
     show-sql: false
     hibernate:
       ddl-auto: update
+
+security:
+  jwt:
+    token:
+      secret-key: my-secret-key
 
 
 logging:
