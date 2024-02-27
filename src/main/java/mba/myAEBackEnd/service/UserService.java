@@ -83,6 +83,9 @@ public class UserService implements UserDetailsService {
 
     public void updateUser(User user,UserDto updateDto){
         user.setActivity(ActiviteEnum.findByLabel(updateDto.getActivity()));
+        user.setImage(updateDto.getImage());
+        user.setFirstName(updateDto.getFirstName());
+        user.setLastName(updateDto.getLastName());
         userRepository.save(user);
     }
 }
