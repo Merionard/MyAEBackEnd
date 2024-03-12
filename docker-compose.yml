@@ -3,9 +3,7 @@ version: '3.8'
 services:
 
   myaebackend:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    image: merionard/myaebe:latest
     ports:
       - "8080:8080"
     depends_on:
@@ -22,6 +20,8 @@ services:
   db:
     image: postgres:latest
     container_name: myaebackend-postgres
+    volumes:
+      - ./data:/var/lib/postgresql
     ports:
       - "5432:5432"
     environment:
