@@ -18,8 +18,8 @@ public class MyAeBackEndApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/auth/**").allowedOrigins("http://localhost:8081");
-				registry.addMapping("/**").allowedOrigins("http://localhost:8081").allowedMethods("GET","PUT","POST","DELETE");
+				registry.addMapping("/auth/**").allowedOrigins("http://mbenarab.librasoft.fr/");
+				registry.addMapping("/**").allowedOrigins("http://mbenarab.librasoft.fr/").allowedMethods("GET","PUT","POST","DELETE");
 			}
 		};
 	}
